@@ -1,43 +1,37 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input, DatePicker } from 'antd';
+import { Button, Form, Input, DatePicker } from 'antd';
 
 
-import MyWorker from '../worker?worker&inline'
+const CustomForm = ({ worker }) => {
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        handleButtonClick(
+            values.case_id,
+            values.date.$d,
+            values.status,
+        )
+    };
 
-const onFinish = (values) => {
-    console.log('Success:', values);
-    handleButtonClick(
-        values.case_id,
-        values.date.$d,
-        values.status,
-    )
-};
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
 
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-
-const handleButtonClick = function (caseId, date, caseStatus) {
-    worker.postMessage(
-        {
-            type: 'insertRow',
-            caseId,
-            date,
-            status: caseStatus,
-        });
-}
-
-const worker = new MyWorker();
-
-worker.addEventListener("message", async event => {
-    console.log(event.data.type)
-    if (event.data.type === "sqliteworkerResponse") {
-        console.log('event from sqlite worker: ', event);
+    const handleButtonClick = function (caseId, date, caseStatus) {
+        worker.postMessage(
+            {
+                type: 'insertRow',
+                caseId,
+                date,
+                status: caseStatus,
+            });
     }
-})
 
-const CustomForm = () => {
-
+    worker.addEventListener("message", async event => {
+        console.log(event.data.type)
+        if (event.data.type === "sqliteworkerResponse") {
+            console.log('event from sqlite worker: ', event);
+        }
+    })
     return (
         <Form
             name="basic"

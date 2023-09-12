@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'antd';
 
-import MyWorker from '../worker?worker&inline'
-
 // Define columns for the DataTable
 const columns = [
     {
@@ -25,11 +23,9 @@ const columns = [
 
 
 // Create a functional component to render the DataTable
-const MyDataTable = () => {
+const MyDataTable = ({ worker }) => {
 
     const [data, setData] = useState([]);
-
-    const worker = new MyWorker();
 
     worker.addEventListener("message", async event => {
         if (event.data.type === "sqliteworkerResponse") {

@@ -21,17 +21,22 @@ const start = function (sqlite3) {
   }
 };
 
-sqlite3InitModule({
+// Get sqlite3 instance
+
+const sqlite3 = await sqlite3InitModule({
   print: log,
   printErr: error,
 }).then((sqlite3) => {
   console.log('Create sqlite db if not already exists');
   try {
-    start(sqlite3);
+    return sqlite3
   } catch (err) {
     error(err.name, err.message);
   }
 });
+
+// run the initial starting script
+start(sqlite3);
 
 const insertNewCase = function (sqlite3, event) {
   let db;
@@ -75,20 +80,17 @@ const readMyCases = function (sqlite3, event) {
 }
 
 self.addEventListener('message', async event => {
-  sqlite3InitModule({
-    print: log,
-    printErr: error,
-  }).then((sqlite3) => {
-    console.log('service worker was pinged with event ', event);
-    try {
-      if (event.data.type === "insertRow") {
-        insertNewCase(sqlite3, event);
-      } else if (event.data.type === "readRows") {
-        readMyCases(sqlite3, event);
-      }
-    } catch (err) {
-      error(err.name, err.message);
+  console.log('service worker was pinged with event ', event);
+  try {
+    if (event.data.type === "insertRow") {
+      insertNewCase(sqlite3, event);
+    } else if (event.data.type === "readRows") {
+      readMyCases(sqlite3, event);
     }
-  });
-  self.postMessage({ type: 'sqliteworkerResponse', payload: 'test123' })
-})
+  } catch (err) {
+    error(err.name, err.message);
+  }
+});
+
+
+
