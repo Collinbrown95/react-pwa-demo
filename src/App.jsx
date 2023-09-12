@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { useState } from 'react'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import CustomLayout from './layout/Layout';
 
 import MyWorker from './worker?worker&inline'
+
+import MyDataTable from './components/Table';
+import CustomForm from './components/Form';
 
 const worker = new MyWorker();
 
@@ -27,18 +33,34 @@ function App() {
 
   return (
     <>
-
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => {
-          setCount((count) => count + 1)
-          handleButtonClick(1, "2020/01/01", "Positive");
-        }
-        }
-        >
-          count is {count}
-        </button>
-      </div>
+      <Router>
+        <Routes>
+          <Route
+            element={
+              <CustomLayout>
+                <MyDataTable />
+              </CustomLayout>
+            }
+            path="/"
+          />
+          <Route
+            element={
+              <CustomLayout>
+                <CustomForm />
+              </CustomLayout>
+            }
+            path="/page2"
+          />
+          <Route
+            element={
+              <CustomLayout>
+                <h1>Page 3</h1>
+              </CustomLayout>
+            }
+            path="/page3"
+          />
+        </Routes>
+      </Router>
     </>
   )
 }

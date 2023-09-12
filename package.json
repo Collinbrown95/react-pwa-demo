@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@sqlite.org/sqlite-wasm": "^3.42.0-build4",
+    "antd": "^5.9.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

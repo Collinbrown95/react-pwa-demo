@@ -45,16 +45,34 @@ const insertNewCase = function (sqlite3, event) {
       sql: 'INSERT INTO tb_cases(case_id, date, status) VALUES (?,?,?)',
       bind: [
         event.data.caseId,
-        event.data.date,
+        event.data.date.toString(),
         event.data.status,
       ]
+    });
+    self.postMessage({ type: 'sqliteworkerResponse', payload: "success" });
+  } finally {
+    db.close();
+  }
+}
+
+
+const readMyCases = function (sqlite3, event) {
+  let db;
+  if ('opfs' in sqlite3) {
+    db = new sqlite3.oo1.OpfsDb('/tb_cases.sqlite3');
+  } else {
+    db = new sqlite3.oo1.DB('/tb_cases.sqlite3', 'ct');
+  }
+  try {
+    const res = db.exec({
+      sql: 'SELECT * FROM tb_cases',
+      returnValue: 'resultRows',
     });
     self.postMessage({ type: 'sqliteworkerResponse', payload: res });
   } finally {
     db.close();
   }
 }
-
 
 self.addEventListener('message', async event => {
   sqlite3InitModule({
@@ -65,6 +83,8 @@ self.addEventListener('message', async event => {
     try {
       if (event.data.type === "insertRow") {
         insertNewCase(sqlite3, event);
+      } else if (event.data.type === "readRows") {
+        readMyCases(sqlite3, event);
       }
     } catch (err) {
       error(err.name, err.message);
