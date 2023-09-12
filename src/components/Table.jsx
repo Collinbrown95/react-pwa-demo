@@ -28,7 +28,15 @@ const MyDataTable = ({ worker }) => {
     const [data, setData] = useState([]);
 
     worker.addEventListener("message", async event => {
-        if (event.data.type === "sqliteworkerResponse") {
+        // If we get a 'workerReady' event, need to send initial readRows message
+        if (event.data.type === "workerReady") {
+            worker.postMessage(
+                {
+                    type: 'readRows',
+                });
+        }
+        // If we get a 'readRows' message, render the response to the UI
+        else if (event.data.type === "sqliteworkerResponse") {
             // auto-incrementing key for react state
             let idCounter = 1;
             const myCases = event.data.payload.map(
