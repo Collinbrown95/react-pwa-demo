@@ -36,7 +36,6 @@ const sqlite3 = await sqlite3InitModule({
   print: console.log,
   printErr: console.error,
 }).then((sqlite3) => {
-  console.log('Create sqlite db if not already exists');
   try {
     return sqlite3
   } catch (err) {

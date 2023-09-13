@@ -7,7 +7,9 @@ const { Title } = Typography;
 
 const CustomForm = ({ worker }) => {
     const onFinish = (values) => {
-        console.log('Success:', values);
+        console.log(`[Form.jsx]:
+        
+Form submission successful.`);
         handleButtonClick(
             values.case_id,
             values.date.$d,
@@ -20,6 +22,15 @@ const CustomForm = ({ worker }) => {
     };
 
     const handleButtonClick = function (caseId, date, caseStatus) {
+        console.log(`[Form.jsx]:
+        
+Sending insertRow message to web worker with the following values:
+
+{
+    case_id: ${caseId},
+    date: ${date},
+    status: ${status}
+}`);
         worker.postMessage(
             {
                 type: 'insertRow',
@@ -30,9 +41,10 @@ const CustomForm = ({ worker }) => {
     }
 
     worker.addEventListener("message", async event => {
-        console.log(event.data.type)
         if (event.data.type === "sqliteworkerResponse") {
-            console.log('event from sqlite worker: ', event);
+            console.log(`[Form.jsx]:
+            
+Received ${event.data.payload} message from web worker, indicating form submission was saved in tb_cases.sqlite3`);
         }
     })
     return (
