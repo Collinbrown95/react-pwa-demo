@@ -1,0 +1,90 @@
+title: |md
+  # Architecture Overview
+|
+
+PHAC: {
+  Static File Server: {
+    shape: image
+    icon: https://icons.terrastruct.com/essentials%2F112-server.svg
+  }
+
+  Kafka Event Queue: {
+    shape: image
+    icon: https://upload.wikimedia.org/wikipedia/commons/0/05/Apache_kafka.svg
+  }
+}
+
+Point of Care: {
+  Firewall: {
+    shape: image
+    icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+  }
+  User Device: {
+    shape: image
+    icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+  }
+  PWA Architecture: {
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+
+    https\://some-origin\.ca: {
+      Main Thread: {
+        style: {
+          stroke: red
+          stroke-dash: 0
+        }
+        "": {
+          shape: image
+          icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+        }
+        Data Entry Form
+        Data Validation
+
+        Display Data Table
+
+        Data Redaction
+        Data Censoring
+
+        Kafka Client: {
+          shape: image
+          icon: https://upload.wikimedia.org/wikipedia/commons/0/05/Apache_kafka.svg
+        }
+
+        Data Entry Form -> Data Validation
+      }
+      Web Worker: {
+        style: {
+          stroke: red
+          stroke-dash: 0
+        }
+        Event Handler (Reads)
+        Event Handler (Writes)
+      }
+      Origin Private File System: {
+        tb_cases\.sqlite3: {
+          shape: image
+          icon: https://upload.wikimedia.org/wikipedia/commons/3/38/SQLite370.svg
+        }
+      }
+      Main Thread.Data Validation -> Web Worker.Event Handler (Writes)
+      Web Worker.Event Handler (Writes) -> Origin Private File System.tb_cases\.sqlite3
+
+      Origin Private File System.tb_cases\.sqlite3 -> Web Worker.Event Handler (Reads)
+      Web Worker.Event Handler (Reads) -> Main Thread.Display Data Table
+
+      Web Worker.Event Handler (Reads) -> Main Thread.Data Redaction
+      Main Thread.Data Redaction -> Main Thread.Data Censoring
+      Main Thread.Data Censoring -> Main Thread.Kafka Client
+    }
+    https\://some-origin\.ca.Main Thread.Kafka Client -> Device Browser
+  }
+}
+PHAC.Static File Server -> Point of Care.Firewall
+Point of Care.Firewall -> Point of Care.User Device
+Point of Care.User Device -> Point of Care.PWA Architecture.Device Browser
+
+Point of Care.PWA Architecture.Device Browser -> Point of Care.User Device
+Point of Care.User Device -> Point of Care.Firewall
+Point of Care.Firewall -> PHAC.Kafka Event Queue

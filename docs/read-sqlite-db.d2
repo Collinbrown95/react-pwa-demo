@@ -1,0 +1,28 @@
+Read From SQLite DB: {
+  shape: sequence_diagram
+
+  main: Main Thread
+  main.style: {
+    stroke: red
+    stroke-dash: 0
+  }
+  worker: Worker Thread
+  worker.style: {
+    stroke: red
+    stroke-dash: 0
+  }
+  opfs: OPFS
+
+  main -> worker.a: Send `readRows` message
+
+  worker.a -> opfs: Create tb_cases.sqlite3 if not exists
+  worker.a -> opfs: Create tb_cases table if not exists
+
+  worker.a -> main: Send `workerReady` message
+  main -> worker: Send `readRows` message
+
+  worker -> opfs: Read requested rows from tb_cases table
+  worker -> main: Send response to `readRows` message
+
+  main -> main: Render table with data from `readRows` response
+}

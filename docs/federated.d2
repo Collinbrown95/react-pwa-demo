@@ -1,0 +1,167 @@
+title: |md
+  # Federated Data Architecture
+|
+
+Province/Territory 1: {
+  Point of Care 1: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+
+  Point of Care 2: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+
+  Point of Care 3: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+}
+
+Province/Territory 2: {
+  Point of Care 1: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+
+  Point of Care 2: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+
+  Point of Care 3: {
+    Firewall: {
+      shape: image
+      icon: https://icons.terrastruct.com/infra%2F003-firewall.svg
+    }
+    User Device: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2F052-smartphone-3.svg
+    }
+    Device Browser: {
+      shape: image
+      icon: https://icons.terrastruct.com/tech%2Fbrowser-2.svg
+    }
+    PWA: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fjavascript.svg
+    }
+  }
+}
+
+PHAC: {
+  Kafka Event Queue: {
+    shape: image
+    icon: https://upload.wikimedia.org/wikipedia/commons/0/05/Apache_kafka.svg
+  }
+
+  Downstream Use Cases: {
+    Censored Database: {
+      shape: image
+      icon: https://icons.terrastruct.com/dev%2Fpostgresql.svg
+    }
+  }
+}
+
+Province/Territory 1.Point of Care 1.PWA -> Province/Territory 1.Point of Care 1.Device Browser
+Province/Territory 1.Point of Care 1.Device Browser -> Province/Territory 1.Point of Care 1.User Device
+Province/Territory 1.Point of Care 1.User Device -> Province/Territory 1.Point of Care 1.Firewall
+Province/Territory 1.Point of Care 1.Firewall -> PHAC.Kafka Event Queue
+
+Province/Territory 1.Point of Care 2.PWA -> Province/Territory 1.Point of Care 2.Device Browser
+Province/Territory 1.Point of Care 2.Device Browser -> Province/Territory 1.Point of Care 2.User Device
+Province/Territory 1.Point of Care 2.User Device -> Province/Territory 1.Point of Care 2.Firewall
+Province/Territory 1.Point of Care 2.Firewall -> PHAC.Kafka Event Queue
+
+Province/Territory 1.Point of Care 3.PWA -> Province/Territory 1.Point of Care 3.Device Browser
+Province/Territory 1.Point of Care 3.Device Browser -> Province/Territory 1.Point of Care 3.User Device
+Province/Territory 1.Point of Care 3.User Device -> Province/Territory 1.Point of Care 3.Firewall
+Province/Territory 1.Point of Care 3.Firewall -> PHAC.Kafka Event Queue
+
+Province/Territory 2.Point of Care 1.PWA -> Province/Territory 2.Point of Care 1.Device Browser
+Province/Territory 2.Point of Care 1.Device Browser -> Province/Territory 2.Point of Care 1.User Device
+Province/Territory 2.Point of Care 1.User Device -> Province/Territory 2.Point of Care 1.Firewall
+Province/Territory 2.Point of Care 1.Firewall -> PHAC.Kafka Event Queue
+
+Province/Territory 2.Point of Care 2.PWA -> Province/Territory 2.Point of Care 2.Device Browser
+Province/Territory 2.Point of Care 2.Device Browser -> Province/Territory 2.Point of Care 2.User Device
+Province/Territory 2.Point of Care 2.User Device -> Province/Territory 2.Point of Care 2.Firewall
+Province/Territory 2.Point of Care 2.Firewall -> PHAC.Kafka Event Queue
+
+Province/Territory 2.Point of Care 3.PWA -> Province/Territory 2.Point of Care 3.Device Browser
+Province/Territory 2.Point of Care 3.Device Browser -> Province/Territory 2.Point of Care 3.User Device
+Province/Territory 2.Point of Care 3.User Device -> Province/Territory 2.Point of Care 3.Firewall
+Province/Territory 2.Point of Care 3.Firewall -> PHAC.Kafka Event Queue
+
+PHAC.Kafka Event Queue -> PHAC.Downstream Use Cases.Censored Database
