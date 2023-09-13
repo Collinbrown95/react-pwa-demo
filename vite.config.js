@@ -26,6 +26,7 @@ export default defineConfig({
       // Add this to ensure the worker file is included
       output: {
         entryFileNames: 'assets/[name].js',
+        assetFileNames: '[name].[ext]'
       }
     }
   }
