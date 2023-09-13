@@ -1,6 +1,12 @@
 // Import necessary dependencies
 import React, { useEffect, useState } from 'react';
+
+import { theme, Typography } from 'antd';
+
 import { Table } from 'antd';
+import { Layout } from 'antd';
+
+const { Title } = Typography;
 
 // Define columns for the DataTable
 const columns = [
@@ -61,10 +67,17 @@ const MyDataTable = ({ worker }) => {
     }, []);
 
     return (
-        <Table
-            dataSource={data}
-            columns={columns}
-        />
+        <Layout style={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-start'
+        }}>
+            <Title>My Cases</Title>
+            <Table
+                dataSource={data}
+                columns={columns}
+            />
+        </Layout>
     );
 };
 
