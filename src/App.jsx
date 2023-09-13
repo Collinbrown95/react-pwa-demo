@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import CustomLayout from './layout/Layout';
 
-import MyWorker from './worker?worker&inline'
+// import MyWorker from './worker?worker&inline'
 
 import MyDataTable from './components/Table';
 import CustomForm from './components/Form';
 
 function App() {
-  const worker = new MyWorker();
+  // const worker = new MyWorker();
+  const worker = new Worker("/assets/worker.js?type=module&worker_file", { type: "module" })
 
   return (
     <>
