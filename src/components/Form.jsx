@@ -41,7 +41,7 @@ Sending insertRow message to web worker with the following values:
     }
 
     worker.addEventListener("message", async event => {
-        if (event.data.type === "sqliteworkerResponse") {
+        if (event.data.type === "sqliteworkerInsertResponse") {
             console.log(`[Form.jsx]:
             
 Received ${event.data.payload} message from web worker, indicating form submission was saved in tb_cases.sqlite3`);

@@ -36,13 +36,27 @@ const MyDataTable = ({ worker }) => {
     worker.addEventListener("message", async event => {
         // If we get a 'workerReady' event, need to send initial readRows message
         if (event.data.type === "workerReady") {
+            console.log(`[Table.jsx]:
+            
+Received workerReady event from web worker.`);
+
+            console.log(`[Table.jsx]:
+            
+Sending readRows message to web worker.`);
             worker.postMessage(
                 {
                     type: 'readRows',
                 });
         }
         // If we get a 'readRows' message, render the response to the UI
-        else if (event.data.type === "sqliteworkerResponse") {
+        else if (event.data.type === "sqliteworkerReadResponse") {
+            console.log(`[Table.jsx]:
+            
+Received sqliteworkerReadResponse from web worker.`);
+
+            console.log(`[Table.jsx]:
+            
+Rendering table using web worker response.`);
             // auto-incrementing key for react state
             let idCounter = 1;
             const myCases = event.data.payload.map(
@@ -60,6 +74,9 @@ const MyDataTable = ({ worker }) => {
     })
 
     useEffect(() => {
+        console.log(`[Table.jsx]:
+        
+Sending readRows message to web worker in useEffect hook.`);
         worker.postMessage(
             {
                 type: 'readRows',

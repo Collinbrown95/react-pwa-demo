@@ -79,7 +79,7 @@ ${INSERT_QUERY}`);
     console.log(`[worker.js]:
     
     Inserted record successfully; sending success message to main thread.`);
-    self.postMessage({ type: 'sqliteworkerResponse', payload: "success" });
+    self.postMessage({ type: 'sqliteworkerInsertResponse', payload: "success" });
   } finally {
     console.log(`[worker.js]:
     
@@ -112,7 +112,7 @@ ${SELECT_START_QUERY}`);
     console.log(`[worker.js]:
     
 Selected records successfully; sending results message to main thread.`);
-    self.postMessage({ type: 'sqliteworkerResponse', payload: res });
+    self.postMessage({ type: 'sqliteworkerReadResponse', payload: res });
   } finally {
     console.log(`[worker.js]:
     
