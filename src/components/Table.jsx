@@ -6,7 +6,23 @@ import { theme, Typography } from 'antd';
 import { Table } from 'antd';
 import { Layout } from 'antd';
 
+import { Button } from 'antd';
+
 const { Title } = Typography;
+
+// Placeholder event handler to simulate a user submitting censored/redacted data
+const handleButtonClick = (event) => {
+    const message = `Send Kafka event with a restricted subset of data, possibly with redaction/censoring applied.`;
+    console.log(`[Table.jsx]:
+
+${message}
+`);
+    alert(`
+${message}
+
+No data were actually sent in this demo; this alert is just for illustrative purposes.
+    `);
+};
 
 // Define columns for the DataTable
 const columns = [
@@ -87,13 +103,15 @@ Sending readRows message to web worker in useEffect hook.`);
         <Layout style={{
             display: 'flex',
             alignItems: 'flex-start',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            flexWrap: 'wrap'
         }}>
             <Title>My Cases</Title>
             <Table
                 dataSource={data}
                 columns={columns}
             />
+            <Button onClick={handleButtonClick} type="primary">Send to PHAC</Button>
         </Layout>
     );
 };
