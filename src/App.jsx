@@ -7,7 +7,6 @@ import MyDataTable from './components/Table';
 import CustomForm from './components/Form';
 
 function App() {
-  const worker = new Worker("/assets/worker.js?type=module&worker_file", { type: "module" })
 
   return (
     <>
@@ -16,9 +15,7 @@ function App() {
           <Route
             element={
               <CustomLayout>
-                <MyDataTable
-                  worker={worker}
-                />
+                <MyDataTable />
               </CustomLayout>
             }
             path="/"
@@ -26,9 +23,7 @@ function App() {
           <Route
             element={
               <CustomLayout>
-                <CustomForm
-                  worker={worker}
-                />
+                <CustomForm />
               </CustomLayout>
             }
             path="/page2"
