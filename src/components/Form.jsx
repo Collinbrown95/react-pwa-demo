@@ -3,9 +3,10 @@ import { Button, Form, Input, DatePicker } from 'antd';
 
 import { theme, Typography, Layout } from 'antd';
 
+import { db } from '../models/db';
+
 const { Title } = Typography;
 
-import { db } from '../models/db';
 
 const CustomForm = () => {
     const onFinish = (values) => {
