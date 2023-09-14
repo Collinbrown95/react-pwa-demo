@@ -5,6 +5,7 @@ import CustomLayout from './layout/Layout';
 
 import MyDataTable from './components/Table';
 import CustomForm from './components/Form';
+import EditData from './components/EditEntry';
 
 function App() {
 
@@ -26,7 +27,15 @@ function App() {
                 <CustomForm />
               </CustomLayout>
             }
-            path="/page2"
+            path="/caseForm"
+          />
+          <Route
+            element={
+              <CustomLayout>
+                <EditData />
+              </CustomLayout>
+            }
+            path="/edit/:id"
           />
         </Routes>
       </Router>

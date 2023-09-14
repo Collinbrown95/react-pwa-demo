@@ -28,7 +28,7 @@ const CustomSider = () => {
                     <Link to="/">Home</Link>
                 </Menu.Item>
                 <Menu.Item key="2" icon={<FormOutlined />}>
-                    <Link to="/page2">Create Case</Link>
+                    <Link to="/caseForm">Create Case</Link>
                 </Menu.Item>
             </Menu>
         </Sider>

@@ -1,15 +1,15 @@
 // Import necessary dependencies
-import React, { useEffect, useState } from 'react';
 
-import { theme, Typography } from 'antd';
+import { Typography } from 'antd';
 
+import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import { Layout } from 'antd';
 
 import { Button } from 'antd';
 
 import { useLiveQuery } from 'dexie-react-hooks';
-
+import { Col, Divider, Row } from 'antd';
 import { db } from '../models/db';
 
 const { Title } = Typography;
@@ -45,6 +45,27 @@ const columns = [
         dataIndex: 'status',
         key: 'status',
     },
+    {
+        title: 'Actions',
+        key: 'actions',
+        render: (text, record) => (
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between'
+            }}>
+                <Row gutter={{ xs: 4, sm: 8, md: 12, lg: 16 }}>
+                    <Col>
+                        <Link to={`/edit/${record.key}`}>
+                            <Button type="primary">Edit</Button>
+                        </Link>
+                    </Col>
+                    <Col><Button type="primary" onClick={handleButtonClick}>Send to PHAC</Button>
+                    </Col>
+                </Row>
+            </div>
+
+        )
+    }
 ];
 
 
@@ -60,12 +81,13 @@ const MyDataTable = () => {
             justifyContent: 'flex-start',
             flexWrap: 'wrap'
         }}>
-            <Title>My Cases</Title>
+            <Divider orientation="left">
+                <Title>My Cases</Title>
+            </Divider>
             <Table
                 dataSource={tbData}
                 columns={columns}
             />
-            <Button onClick={handleButtonClick} type="primary">Send to PHAC</Button>
         </Layout>
     );
 };
