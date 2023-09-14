@@ -5,13 +5,11 @@ import { theme, Typography, Layout } from 'antd';
 
 const { Title } = Typography;
 
-const CustomForm = ({ worker }) => {
+import { db } from '../models/db';
+
+const CustomForm = () => {
     const onFinish = (values) => {
-        console.log(`[Form.jsx]:
-        
-Form submission successful.`);
         handleButtonClick(
-            values.case_id,
             values.date.$d,
             values.status,
         )
@@ -21,32 +19,15 @@ Form submission successful.`);
         console.log('Failed:', errorInfo);
     };
 
-    const handleButtonClick = function (caseId, date, caseStatus) {
-        console.log(`[Form.jsx]:
-        
-Sending insertRow message to web worker with the following values:
-
-{
-    case_id: ${caseId},
-    date: ${date},
-    status: ${status}
-}`);
-        worker.postMessage(
-            {
-                type: 'insertRow',
-                caseId,
-                date,
-                status: caseStatus,
-            });
+    const handleButtonClick = async function (date, caseStatus) {
+        const id = await db.tb_cases.add({
+            "date": date,
+            "status": caseStatus,
+        });
+        console.log("created observation in IndexDB with id: ", id);
     }
 
-    worker.addEventListener("message", async event => {
-        if (event.data.type === "sqliteworkerInsertResponse") {
-            console.log(`[Form.jsx]:
-            
-Received ${event.data.payload} message from web worker, indicating form submission was saved in tb_cases.sqlite3`);
-        }
-    })
+
     return (
         <Layout style={{
             display: 'flex',
@@ -64,14 +45,6 @@ Received ${event.data.payload} message from web worker, indicating form submissi
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-                <Form.Item
-                    label="Case ID"
-                    name="case_id"
-                    rules={[{ required: true, message: 'Please input the Case ID' }]}
-                >
-                    <Input />
-                </Form.Item>
-
                 <Form.Item
                     label="Date"
                     name="date"
