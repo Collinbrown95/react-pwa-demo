@@ -2,9 +2,6 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 class CustomRequestHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
-        # Add custom headers before ending headers
-        self.send_header("Cross-Origin-Opener-Policy", "same-origin")
-        self.send_header("Cross-Origin-Embedder-Policy", "require-corp")
         super().end_headers()
 
 def run(server_class=HTTPServer, handler_class=CustomRequestHandler, port=8001):

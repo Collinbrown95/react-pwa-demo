@@ -1,11 +1,11 @@
 FROM python:alpine
 
-COPY dist /app/dist
+COPY build /app/build
 
 RUN adduser -D myuser
 
-WORKDIR /app/dist
-RUN chown -R myuser:myuser /app/dist
+WORKDIR /app/build
+RUN chown -R myuser:myuser /app/build
 
 USER myuser
 
