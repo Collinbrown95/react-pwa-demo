@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button, Form, Input, DatePicker } from 'antd';
 
-import { theme, Typography, Layout } from 'antd';
+import { Typography, Layout, Select } from 'antd';
 
 import { db } from '../models/db';
 
 const { Title } = Typography;
 
+const { Option } = Select;
 
 const CustomForm = () => {
     const onFinish = (values) => {
@@ -47,13 +48,23 @@ const CustomForm = () => {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Date"
+                    label="Date of Birth"
                     name="date"
                     rules={[{ required: true, message: 'Please input the date' }]}
                 >
                     <DatePicker />
                 </Form.Item>
-
+                <Form.Item
+                    name="gender"
+                    label="Gender"
+                    rules={[{ required: true, message: 'Please select gender!' }]}
+                >
+                    <Select placeholder="select your gender">
+                        <Option value="male">Male</Option>
+                        <Option value="female">Female</Option>
+                        <Option value="other">Other</Option>
+                    </Select>
+                </Form.Item>
                 <Form.Item
                     label="Status"
                     name="status"

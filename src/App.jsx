@@ -7,6 +7,8 @@ import MyDataTable from './components/Table';
 import CustomForm from './components/Form';
 import EditData from './components/EditEntry';
 
+import OCR from './pages/OCR';
+
 function App() {
 
   return (
@@ -36,6 +38,14 @@ function App() {
               </CustomLayout>
             }
             path="/edit/:id"
+          />
+          <Route
+            element={
+              <CustomLayout>
+                <OCR />
+              </CustomLayout>
+            }
+            path="/ocr"
           />
         </Routes>
       </Router>

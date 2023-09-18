@@ -30,6 +30,9 @@ const CustomSider = () => {
                 <Menu.Item key="2" icon={<FormOutlined />}>
                     <Link to="/caseForm">Create Case</Link>
                 </Menu.Item>
+                <Menu.Item key="3" icon={<FormOutlined />}>
+                    <Link to="/ocr">Extract Image</Link>
+                </Menu.Item>
             </Menu>
         </Sider>
     );
