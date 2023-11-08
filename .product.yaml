@@ -1,3 +1,3 @@
 productName: Your Product Name
-webappUrls:
-- https://safeinputs.phac.alpha.canada.ca
+webEndpoints:
+  - https://safeinputs.phac.alpha.canada.ca
